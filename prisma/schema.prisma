@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  // Resuelto relativo a prisma/schema.prisma -> base en la raíz del proyecto.
+  url      = "file:../dev.db"
+}
+
+model Slot {
+  id            String    @id @default(uuid())
+  fecha         String    // ISO date, e.g. 2026-09-03
+  horaInicio    String    // "00:00" .. "23:00"
+  horaFin       String    // "01:00" .. "00:00" next day
+  estado        String    @default("disponible") // disponible | ocupado
+  nombreDisplay String?
+  custodioId    String?   @unique
+  custodio      Custodio? @relation(fields: [custodioId], references: [id])
+
+  @@unique([fecha, horaInicio])
+}
+
+model Custodio {
+  id                      String   @id @default(uuid())
+  tipo                    String   // grupo | individuo
+  tipoGrupo               String?  // Familia, Parroquia, etc.
+  nombreGrupo             String?
+  ciudad                  String?
+  nombreResponsable       String
+  telefono                String
+  email                   String
+  fechaHoraAsignada       String   // ISO datetime in Bogota GMT-5
+  aceptaResponsabilidad   Boolean
+  aceptaDatos             Boolean
+  estado                  String   @default("activo") // activo | cancelado
+  creadoEn                DateTime @default(now())
+  recordatorio24hEnviado  Boolean  @default(false)
+  recordatorio12hEnviado  Boolean  @default(false)
+  recordatorio3hEnviado   Boolean  @default(false)
+
+  slot Slot?
+}
+
+model ConfiguracionEvento {
+  id          Int     @id @default(autoincrement())
+  clave       String  @unique
+  valor       String
+  descripcion String?
+}
