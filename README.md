@@ -2,12 +2,19 @@
 
 Portal oficial para el evento de oración continua organizado por Fidatec. Permite la inscripción de custodios, la consulta pública de la programación de 72 horas y el acceso a la transmisión en vivo.
 
+🌐 **URL oficial:** [https://72horasconmaria.fidatec.org.co](https://72horasconmaria.fidatec.org.co)
+
+📅 **Evento:** 5, 6 y 7 de septiembre de 2026 · Salón Santuario, ExpoFuturo Pereira, Risaralda
+
+✅ **Estado:** Portal desplegado en producción y listo para recibir inscripciones.
+
 ## Tecnologías
 
 - **Framework:** Next.js 16 (App Router + React 19)
 - **Estilos:** Tailwind CSS 4
-- **Base de datos:** Prisma + SQLite (desarrollo) / PostgreSQL (producción)
+- **Base de datos:** Prisma + PostgreSQL (producción en Render)
 - **Correos:** Nodemailer + Gmail app password (SMTP)
+- **Despliegue:** Render (Web Service + Cron Job + PostgreSQL)
 - **Tipografías:** Playfair Display, Great Vibes, Inter, Cormorant Garamond, Dancing Script, Open Sans
 - **Despliegue recomendado:** Render (Web Service + Cron Job)
 
@@ -70,11 +77,13 @@ El portal estará disponible en [http://localhost:3000](http://localhost:3000).
 
 ## Flujos implementados
 
-- **Home:** 3 tarjetas principales (inscripción, programación, transmisión) + aviso de entrada libre.
+- **Home:** 3 tarjetas principales (inscripción, programación, transmisión) + aviso de entrada libre y horario del lugar de oración.
 - **Inscripción:** selección de slot entre 72 horas, tipo de participante (grupo/individuo), formulario multi-paso y confirmación.
-- **Programación:** vista de 3 días con 24 slots cada uno, filtros, indicador GMT-5.
+- **Programación:** vista de 3 días con 24 slots cada uno; slots disponibles muestran botón para ser custodio.
 - **Transmisión:** contador regresivo al 5 de septiembre de 2026, 00:00 GMT-5.
-- **Lugar:** Salón Santuario, ExpoFuturo Pereira, Risaralda. Visitas al lugar de oración disponibles las 24 horas (00:00 – 11:59 p.m.).
+- **Correo de confirmación:** incluye datos del registro, responsabilidades, enlace a programación y botón para **agregar el evento a Google Calendar**.
+- **Lugar:** Salón Santuario, ExpoFuturo Pereira, Risaralda. El lugar de oración puede visitarse en cualquier hora desde las 00:00 hasta las 11:59 p.m.
+- **Contacto:** canal oficial por correo y números de WhatsApp en el footer.
 - **Política de privacidad:** página dedicada con información del tratamiento de datos.
 
 ## Recordatorios automáticos
@@ -101,29 +110,60 @@ npm run reminders
 
 ## Producción en Render
 
-El archivo `render.yaml` ya tiene la configuración lista. Pasos:
+El portal ya está desplegado en producción mediante el archivo `render.yaml`.
+
+### Estado actual
+
+- **Web Service:** `portal-72-horas` (plan Starter)
+- **Base de datos:** PostgreSQL `db-72-horas` (plan Basic-256mb)
+- **Cron Job:** `reminders-72-horas` (cada hora)
+- **URL pública:** [https://72horasconmaria.fidatec.org.co](https://72horasconmaria.fidatec.org.co)
+- **Dominio personalizado:** configurado en Render (`72horasconmaria.fidatec.org.co`)
+
+### Variables de entorno configuradas
+
+| Variable | Valor actual |
+|---|---|
+| `NEXT_PUBLIC_APP_URL` | `https://72horasconmaria.fidatec.org.co` |
+| `EMAIL_FROM` | `proyectos@fidatec.org.co` |
+| `SMTP_HOST` | `smtp.gmail.com` |
+| `SMTP_PORT` | `465` |
+| `SMTP_USER` | `proyectos@fidatec.org.co` |
+| `SMTP_PASS` | *App password de Gmail* |
+| `CRON_SECRET` | *Valor seguro compartido entre Web Service y Cron Job* |
+| `TZ` | `America/Bogota` |
+
+### Pasos para recrear el despliegue
 
 1. En el dashboard de Render, crea un **Blueprint** seleccionando el repositorio.
 2. Render creará automáticamente:
    - Web Service `portal-72-horas`
    - Base de datos PostgreSQL `db-72-horas`
    - Cron Job `reminders-72-horas`
-3. Configura las variables de entorno que faltan en el dashboard (tanto en el Web Service como en el Cron Job):
+3. Configura las variables de entorno sensibles en el dashboard (mismo valor en Web Service y Cron Job):
    - `SMTP_PASS` → app password de Gmail
-   - `CRON_SECRET` → escribe una contraseña segura **y pon el mismo valor** en el Web Service y en el Cron Job `reminders-72-horas`
-   - Verifica `NEXT_PUBLIC_APP_URL` con tu dominio real
-4. Ejecuta una migración inicial en el Web Service (shell):
+   - `CRON_SECRET` → contraseña segura
+4. Ejecuta en la shell del Web Service:
    ```bash
-   npm run db:push
-   ```
-5. Ejecuta el seed para crear los 72 slots:
-   ```bash
+   npx prisma db push
    npm run db:seed
    ```
 
+### Base de datos
+
+- Esquema sincronizado con PostgreSQL.
+- 72 slots creados (3 días × 24 horas) mediante `npm run db:seed`.
+- Recordatorios de correo se envían automáticamente cada hora vía cron job.
+
+## Identidad visual
+
+- **Paleta:** azul marino `#1B3A5C`, dorado `#C9A84C`, crema `#F5F0E6`.
+- **Tipografías:** Playfair Display, Great Vibes, Inter, Cormorant Garamond, Dancing Script, Open Sans.
+- **Favicon:** `M` cursiva dorada dentro de círculo dorado con fondo azul marino.
+
 ## Notas sobre imágenes
 
-El proyecto incluye placeholders vectoriales y un componente de fondo hero generado por código. Para reemplazarlos por imágenes promocionales reales, coloca los archivos en `/public` y actualiza las referencias en los componentes.
+El hero usa un fondo generado por código (gradientes y luces sutiles). Para agregar una imagen promocional real, coloca el archivo en `/public` y actualiza el componente `HeroBackground`.
 
 ## Licencia
 
