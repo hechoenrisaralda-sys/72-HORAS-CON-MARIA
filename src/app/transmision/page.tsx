@@ -47,7 +47,7 @@ export default function TransmisionPage() {
               href="/programacion"
               className="rounded-xl bg-gold px-6 py-3 font-semibold text-navy transition hover:bg-[#b8983e]"
             >
-              Ver custodio de la hora
+              Ver guía de la hora
             </a>
           </div>
         </div>

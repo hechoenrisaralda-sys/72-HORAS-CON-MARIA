@@ -102,6 +102,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, custodio: result, emailSent: true });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: "Error al registrar custodio" }, { status: 500 });
+    return NextResponse.json({ error: "Error al registrar guía" }, { status: 500 });
   }
 }

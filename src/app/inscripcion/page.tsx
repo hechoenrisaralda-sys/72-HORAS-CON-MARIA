@@ -183,7 +183,7 @@ export default function InscripcionPage() {
             </h1>
             <p className="mx-auto mt-3 max-w-2xl text-base text-gray md:mt-4 md:text-lg">
               Reúne a tu familia, parroquia, comunidad, grupo de oración, empresa,
-              organización o tú mismo y conviértete en Custodio de una Hora con{" "}
+              organización o tú mismo y conviértete en Guía de una Hora con{" "}
               <span className="font-script text-gold">María</span>.
             </p>
           </div>

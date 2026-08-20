@@ -8,17 +8,17 @@ export default function Home() {
   const cards = [
     {
       icon: FileText,
-      title: "Inscripción para el Custodio del Rezo del Rosario",
+      title: "Inscripción para el Guía del Rezo del Rosario",
       description:
-        "Inscríbete como guía o custodio de una hora específica. Reúne a tu familia, parroquia, comunidad o empresa.",
+        "Inscríbete como guía de una hora específica. Reúne a tu familia, parroquia, comunidad o empresa.",
       href: "/inscripcion",
-      cta: "Ser custodio",
+      cta: "Ser guía",
     },
     {
       icon: Calendar,
       title: "Ver Programación",
       description:
-        "Consulta los 3 días del evento con sus 72 horas de oración. Encuentra el custodio de cada Hora de María.",
+        "Consulta los 3 días del evento con sus 72 horas de oración. Encuentra el guía de cada Hora de María.",
       href: "/programacion",
       cta: "Ver programación",
     },
@@ -67,8 +67,8 @@ export default function Home() {
             hasta las 11:59 p.m.
           </p>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-cream/80 md:text-base">
-            Solo se inscriben quienes quieran ser custodios de cada una de las Horas
-            de María. La entrada es libre y puedes ver quién es el custodio de cada
+            Solo se inscriben quienes quieran ser guías de cada una de las Horas
+            de María. La entrada es libre y puedes ver quién es el guía de cada
             hora en la programación.
           </p>
         </div>

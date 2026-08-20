@@ -9,7 +9,7 @@ export default function Navbar() {
 
   const links = [
     { href: "/", label: "Inicio" },
-    { href: "/inscripcion", label: "Ser custodio" },
+    { href: "/inscripcion", label: "Ser guía" },
     { href: "/programacion", label: "Programación" },
     { href: "/transmision", label: "Transmisión en vivo" },
     { href: "/privacidad", label: "Privacidad" },

@@ -111,7 +111,7 @@ export default function ProgramacionPage() {
                 href={`/inscripcion?slot=${slot.id}`}
                 className="self-start rounded-lg bg-gold px-3 py-1.5 text-xs font-semibold text-navy transition hover:bg-[#b8983e]"
               >
-                Ser custodio
+                Ser guía
               </Link>
             </div>
           )}

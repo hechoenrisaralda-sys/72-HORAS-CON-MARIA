@@ -35,9 +35,9 @@ function buildGoogleCalendarUrl(data: CustodioMailData): string {
   const endDate = data.horaFin === "00:00" ? nextDay(data.fecha) : data.fecha;
   const start = toCalendarDateTime(data.fecha, data.horaInicio);
   const end = toCalendarDateTime(endDate, data.horaFin === "00:00" ? "00:00" : data.horaFin);
-  const title = encodeURIComponent(`72 Horas con María - Custodio de la hora ${data.horaInicio}`);
+  const title = encodeURIComponent(`72 Horas con María - Guía de la hora ${data.horaInicio}`);
   const details = encodeURIComponent(
-    `Has sido registrado como custodio de una Hora con María.\n\nFecha: ${data.fecha}\nHora: ${data.horaInicio} a ${data.horaFin} Hora de Bogotá (GMT-5)\nLugar: Salón Santuario, ExpoFuturo Pereira, Risaralda`
+    `Has sido registrado como guía de una Hora con María.\n\nFecha: ${data.fecha}\nHora: ${data.horaInicio} a ${data.horaFin} Hora de Bogotá (GMT-5)\nLugar: Salón Santuario, ExpoFuturo Pereira, Risaralda`
   );
   const location = encodeURIComponent("Salón Santuario, ExpoFuturo Pereira, Risaralda");
   return `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&location=${location}&ctz=America/Bogota`;
@@ -75,7 +75,7 @@ function baseTemplate(content: string) {
 }
 
 export async function sendConfirmationEmail(data: CustodioMailData) {
-  const subject = `✅ Confirmación de tu registro – Custodio de una Hora con María`;
+  const subject = `✅ Confirmación de tu registro – Guía de una Hora con María`;
   const displayName =
     data.tipo === "grupo" && data.nombreGrupo
       ? `${data.nombreGrupo} (${data.nombreResponsable})`
@@ -83,7 +83,7 @@ export async function sendConfirmationEmail(data: CustodioMailData) {
 
   const html = baseTemplate(`
     <p style="font-size: 16px;">Hola <strong>${data.nombreResponsable}</strong>,</p>
-    <p style="font-size: 16px;">Tu registro como custodio ha sido exitoso. Estos son los detalles de tu Hora con María:</p>
+    <p style="font-size: 16px;">Tu registro como guía ha sido exitoso. Estos son los detalles de tu Hora con María:</p>
     <div style="background: #FFFFFF; border: 1px solid #E8D5A3; border-radius: 12px; padding: 20px; margin: 20px 0;">
       <p style="margin: 0 0 8px; font-size: 16px;"><strong>Fecha:</strong> ${data.fecha}</p>
       <p style="margin: 0 0 8px; font-size: 16px;"><strong>Hora:</strong> ${data.horaInicio} a ${data.horaFin} Hora de Bogotá (GMT-5)</p>

@@ -1,6 +1,6 @@
 # Portal Web — 72 Horas con María
 
-Portal oficial para el evento de oración continua organizado por Fidatec. Permite la inscripción de custodios, la consulta pública de la programación de 72 horas y el acceso a la transmisión en vivo.
+Portal oficial para el evento de oración continua organizado por Fidatec. Permite la inscripción de guías, la consulta pública de la programación de 72 horas y el acceso a la transmisión en vivo.
 
 🌐 **URL oficial:** [https://72horasconmaria.fidatec.org.co](https://72horasconmaria.fidatec.org.co)
 
@@ -79,7 +79,7 @@ El portal estará disponible en [http://localhost:3000](http://localhost:3000).
 
 - **Home:** 3 tarjetas principales (inscripción, programación, transmisión) + aviso de entrada libre y horario del lugar de oración.
 - **Inscripción:** selección de slot entre 72 horas, tipo de participante (grupo/individuo), formulario multi-paso y confirmación.
-- **Programación:** vista de 3 días con 24 slots cada uno; slots disponibles muestran botón para ser custodio.
+- **Programación:** vista de 3 días con 24 slots cada uno; slots disponibles muestran botón para ser guía.
 - **Transmisión:** contador regresivo al 5 de septiembre de 2026, 00:00 GMT-5.
 - **Correo de confirmación:** incluye datos del registro, responsabilidades, enlace a programación y botón para **agregar el evento a Google Calendar**.
 - **Lugar:** Salón Santuario, ExpoFuturo Pereira, Risaralda. El lugar de oración puede visitarse en cualquier hora desde las 00:00 hasta las 11:59 p.m.

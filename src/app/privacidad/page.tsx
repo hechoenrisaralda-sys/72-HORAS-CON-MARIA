@@ -38,7 +38,7 @@ export default function PrivacidadPage() {
                 2. Datos recolectados
               </h2>
               <p>
-                Para la inscripción de custodios se solicita: tipo de
+                Para la inscripción de guías se solicita: tipo de
                 participante, nombre del grupo (si aplica), ciudad, nombre del
                 responsable, número de contacto y correo electrónico.
               </p>
