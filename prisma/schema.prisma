@@ -3,9 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  // Resuelto relativo a prisma/schema.prisma -> base en la raíz del proyecto.
-  url      = "file:../dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Slot {
