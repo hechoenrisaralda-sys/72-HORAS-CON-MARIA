@@ -51,6 +51,10 @@ export const metadata: Metadata = {
   title: "72 Horas con María | Fidatec",
   description:
     "Una cadena de amor que nunca se detiene. Unidos en oración, sostenidos por María. Del 5 al 7 de septiembre de 2026. Salón Santuario, ExpoFuturo Pereira, Risaralda.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

@@ -13,7 +13,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: NEXT_PUBLIC_APP_URL
-        value: https://portal-72-horas.onrender.com
+        value: https://72horasconmaria.fidatec.org.co
       - key: EMAIL_FROM
         value: proyectos@fidatec.org.co
       - key: SMTP_HOST
@@ -39,7 +39,7 @@ services:
       curl -fsSL -H "x-cron-secret: ${CRON_SECRET}" "${NEXT_PUBLIC_APP_URL}/api/cron/reminders"
     envVars:
       - key: NEXT_PUBLIC_APP_URL
-        value: https://portal-72-horas.onrender.com
+        value: https://72horasconmaria.fidatec.org.co
       - key: CRON_SECRET
         sync: false # Configurar en el dashboard (mismo valor que en el Web Service)
 

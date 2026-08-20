@@ -18,6 +18,30 @@ export async function verifyMailConnection() {
 }
 
 const from = `"72 Horas con María" <${process.env.EMAIL_FROM || "proyectos@fidatec.org.co"}>`;
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://72horasconmaria.fidatec.org.co";
+
+function nextDay(fecha: string): string {
+  const [y, m, d] = fecha.split("-").map(Number);
+  const date = new Date(y, m - 1, d);
+  date.setDate(date.getDate() + 1);
+  return date.toISOString().split("T")[0];
+}
+
+function toCalendarDateTime(fecha: string, hora: string): string {
+  return fecha.replace(/-/g, "") + "T" + hora.replace(":", "") + "00-0500";
+}
+
+function buildGoogleCalendarUrl(data: CustodioMailData): string {
+  const endDate = data.horaFin === "00:00" ? nextDay(data.fecha) : data.fecha;
+  const start = toCalendarDateTime(data.fecha, data.horaInicio);
+  const end = toCalendarDateTime(endDate, data.horaFin === "00:00" ? "00:00" : data.horaFin);
+  const title = encodeURIComponent(`72 Horas con María - Custodio de la hora ${data.horaInicio}`);
+  const details = encodeURIComponent(
+    `Has sido registrado como custodio de una Hora con María.\n\nFecha: ${data.fecha}\nHora: ${data.horaInicio} a ${data.horaFin} Hora de Bogotá (GMT-5)\nLugar: Salón Santuario, ExpoFuturo Pereira, Risaralda`
+  );
+  const location = encodeURIComponent("Salón Santuario, ExpoFuturo Pereira, Risaralda");
+  return `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&location=${location}&ctz=America/Bogota`;
+}
 
 export interface CustodioMailData {
   email: string;
@@ -69,7 +93,8 @@ export async function sendConfirmationEmail(data: CustodioMailData) {
     <p style="font-size: 16px;">Te comprometes a realizar el rezo del rosario durante la hora asignada y puedes acompañar con cantos, oraciones o cualquier práctica devocional.</p>
     <p style="font-size: 16px; margin-top: 16px;"><strong>Lugar:</strong> Salón Santuario, ExpoFuturo Pereira, Risaralda.</p>
     <p style="font-size: 16px; margin-top: 8px;">Puedes visitar el lugar de oración en cualquier hora desde las 00:00 hasta las 11:59 p.m.</p>
-    <p style="font-size: 16px; margin-top: 24px;"><a href="${process.env.NEXT_PUBLIC_APP_URL}/programacion" style="background: #1B3A5C; color: #F5F0E6; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-block;">Ver programación</a></p>
+    <p style="font-size: 16px; margin-top: 24px;"><a href="${APP_URL}/programacion" style="background: #1B3A5C; color: #F5F0E6; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-block;">Ver programación</a></p>
+    <p style="font-size: 16px; margin-top: 16px;"><a href="${buildGoogleCalendarUrl(data)}" style="background: #C9A84C; color: #1B3A5C; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-block;">📅 Agregar a Google Calendar</a></p>
     <p style="font-size: 16px; margin-top: 24px; font-style: italic;">"María, enséñanos a creer, a esperar y a amar sin medida."</p>
     <p style="font-size: 14px; color: #6B7280; margin-top: 24px;">Para ejercer tu derecho de supresión de datos, escríbenos a proyectos@fidatec.org.co.</p>
   `);
@@ -106,7 +131,7 @@ export async function sendReminderEmail(
       <p style="margin: 0; font-size: 16px;"><strong>Hora:</strong> ${data.horaInicio} a ${data.horaFin} Hora de Bogotá (GMT-5)</p>
     </div>
     <p style="font-size: 16px; margin-top: 16px;"><strong>Lugar:</strong> Salón Santuario, ExpoFuturo Pereira, Risaralda. Puedes visitar el lugar de oración en cualquier hora desde las 00:00 hasta las 11:59 p.m.</p>
-    <p style="font-size: 16px; margin-top: 24px;"><a href="${process.env.NEXT_PUBLIC_APP_URL}/transmision" style="background: #1B3A5C; color: #F5F0E6; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-block;">Ir a la transmisión</a></p>
+    <p style="font-size: 16px; margin-top: 24px;"><a href="${APP_URL}/transmision" style="background: #1B3A5C; color: #F5F0E6; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-block;">Ir a la transmisión</a></p>
     <p style="font-size: 14px; color: #6B7280; margin-top: 24px;">Soporte: proyectos@fidatec.org.co</p>
   `);
 

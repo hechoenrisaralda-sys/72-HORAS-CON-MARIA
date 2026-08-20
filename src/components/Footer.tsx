@@ -25,7 +25,34 @@ export default function Footer() {
             >
               proyectos@fidatec.org.co
             </a>
-            <div className="mt-3 flex justify-center gap-4 md:justify-end">
+            <p className="mt-3 text-sm text-cream/80">WhatsApp:</p>
+            <div className="mt-1 flex flex-col items-center gap-1 md:items-end">
+              <a
+                href="https://wa.me/573016368619"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-gold hover:underline"
+              >
+                +57 301 636 8619
+              </a>
+              <a
+                href="https://wa.me/573172462908"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-gold hover:underline"
+              >
+                +57 317 246 2908
+              </a>
+              <a
+                href="https://wa.me/573136555435"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-gold hover:underline"
+              >
+                +57 313 655 5435
+              </a>
+            </div>
+            <div className="mt-4 flex justify-center gap-4 md:justify-end">
               <Link href="/" className="text-sm text-cream/70 hover:text-gold">
                 Inicio
               </Link>
