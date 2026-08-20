@@ -47,4 +47,4 @@ databases:
   - name: db-72-horas
     databaseName: horasconmaria
     user: horasconmaria
-    plan: basic-512mb
+    plan: basic-256mb
