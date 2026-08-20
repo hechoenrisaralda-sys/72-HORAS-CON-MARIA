@@ -25,7 +25,7 @@ services:
       - key: SMTP_PASS
         sync: false # Configurar en el dashboard: app password de Gmail
       - key: CRON_SECRET
-        generateValue: true
+        sync: false # Configurar en el dashboard (mismo valor en el cron job)
       - key: TZ
         value: America/Bogota
 
@@ -41,10 +41,7 @@ services:
       - key: NEXT_PUBLIC_APP_URL
         value: https://portal-72-horas.onrender.com
       - key: CRON_SECRET
-        fromService:
-          name: portal-72-horas
-          type: web
-          property: envVars.CRON_SECRET
+        sync: false # Configurar en el dashboard (mismo valor que en el Web Service)
 
 databases:
   - name: db-72-horas

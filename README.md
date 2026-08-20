@@ -108,9 +108,9 @@ El archivo `render.yaml` ya tiene la configuración lista. Pasos:
    - Web Service `portal-72-horas`
    - Base de datos PostgreSQL `db-72-horas`
    - Cron Job `reminders-72-horas`
-3. Configura las variables de entorno que faltan en el dashboard:
+3. Configura las variables de entorno que faltan en el dashboard (tanto en el Web Service como en el Cron Job):
    - `SMTP_PASS` → app password de Gmail
-   - `CRON_SECRET` → generar o copiar del servicio web
+   - `CRON_SECRET` → escribe una contraseña segura **y pon el mismo valor** en el Web Service y en el Cron Job `reminders-72-horas`
    - Verifica `NEXT_PUBLIC_APP_URL` con tu dominio real
 4. Ejecuta una migración inicial en el Web Service (shell):
    ```bash
